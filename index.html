@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RESET.CREA — Lista de espera</title>
+<meta name="description" content="Construye una Marca Auténtica en Redes que Impacte y Conecte Con tus clientes. Únete a la lista de espera de RESET.CREA.">
+
+<link rel="icon" type="image/png" href="assets/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blue: #0A8FFF;
+    --blue-deep: #0070D4;
+    --blue-light: #D6EAFF;
+    --navy: #0A2540;
+    --yellow: #FFE500;
+    --white: #FFFFFF;
+    --display: 'Anton', 'Impact', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blue);
+    color: var(--white);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  /* =========== NAV =========== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 143, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-logo {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .nav-cta {
+    font-family: var(--body);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 10px 20px;
+    background: var(--white);
+    color: var(--navy);
+    border-radius: 100px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* =========== HERO =========== */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: var(--blue);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: var(--yellow);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    right: -5%;
+    width: 350px;
+    height: 350px;
+    background: var(--white);
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .hero-logo {
+    height: 90px;
+    width: auto;
+    margin: 0 auto 32px;
+    filter: brightness(0) invert(1);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  h1.hero-title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(42px, 7.5vw, 96px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+
+  h1.hero-title .highlight {
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 0 12px;
+    display: inline-block;
+    transform: rotate(-1deg);
+  }
+
+  .hero-sub {
+    font-family: var(--display);
+    font-size: clamp(16px, 2vw, 22px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s forwards;
+  }
+
+  .audio-hint {
+    font-family: var(--display);
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+    line-height: 1;
+  }
+
+  /* =========== VSL =========== */
+  .vsl-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .vsl-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--navy);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--white);
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.4),
+      0 0 0 6px rgba(255, 229, 0, 0.3);
+  }
+
+  .vsl-frame video,
+  .vsl-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .vsl-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    cursor: pointer;
+    background: radial-gradient(circle at center, #1a3a5c 0%, #051a30 80%);
+  }
+
+  .vsl-placeholder:hover .play-btn { transform: scale(1.1); }
+
+  .play-btn {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 60px rgba(255, 229, 0, 0.4);
+  }
+
+  .play-btn svg {
+    margin-left: 6px;
+    width: 36px;
+    height: 36px;
+    fill: var(--navy);
+  }
+
+  .vsl-placeholder-text {
+    font-family: var(--display);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  /* =========== CTA =========== */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 22px 52px;
+    background: var(--white);
+    color: var(--navy);
+    border: 0;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 14px 40px rgba(0, 0, 0, 0.25),
+      0 0 0 6px rgba(255, 229, 0, 0);
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 229, 0, 0.4), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .cta:hover::before { transform: translateX(100%); }
+
+  .cta:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.3),
+      0 0 0 6px rgba(255, 229, 0, 0.4);
+  }
+
+  .cta-yellow {
+    background: var(--yellow);
+    color: var(--navy);
+  }
+
+  .cta-arrow { transition: transform 0.3s; }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
+
+  .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.75s forwards;
+  }
+
+  .cta-meta {
+    font-family: var(--display);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.8;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* =========== SOCIAL PROOF =========== */
+  .social-proof {
+    padding: 48px 24px;
+    background: var(--white);
+    color: var(--navy);
+    text-align: center;
+  }
+
+  .rating {
+    font-family: var(--display);
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+
+  .rating .stars {
+    color: var(--yellow);
+    font-size: 22px;
+    margin-right: 10px;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 0 rgba(10, 37, 64, 0.3);
+  }
+
+  .social-headline {
+    font-family: var(--display);
+    font-size: clamp(22px, 3vw, 34px);
+    text-transform: uppercase;
+    line-height: 1.1;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--navy);
+  }
+
+  .social-sub {
+    color: var(--navy);
+    font-size: 16px;
+    max-width: 780px;
+    margin: 20px auto 0;
+    line-height: 1.55;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  /* =========== SECTIONS =========== */
+  .section-eyebrow {
+    font-family: var(--display);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 64px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-title .yellow {
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 0 14px;
+    display: inline-block;
+    transform: rotate(-1deg);
+  }
+
+  /* =========== TESTIMONIOS =========== */
+  .testimonials {
+    padding: 120px 24px;
+    background: var(--blue-light);
+    color: var(--navy);
+  }
+
+  .testimonials .section-eyebrow { color: var(--blue-deep); }
+  .testimonials .section-title { color: var(--navy); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .testi-card {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: var(--navy);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid var(--white);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 40px rgba(10, 37, 64, 0.15);
+  }
+
+  .testi-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(10, 37, 64, 0.25);
+  }
+
+  .testi-card iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* =========== BENEFITS =========== */
+  .benefits {
+    padding: 120px 24px;
+    background: var(--blue);
+  }
+
+  .benefits .section-eyebrow { color: var(--yellow); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .benefit {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border: 3px solid var(--white);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .benefit:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+  }
+
+  .benefit-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .benefit:hover .benefit-img { transform: scale(1.06); }
+
+  .benefit-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 37, 64, 0.1) 0%, rgba(10, 37, 64, 0.9) 100%);
+    z-index: 1;
+  }
+
+  .benefit-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .benefit-num {
+    font-family: var(--display);
+    font-size: 32px;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .benefit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .benefit-kicker {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  .benefit-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 1.9vw, 26px);
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+
+  /* =========== COMUNIDAD =========== */
+  .comunidad {
+    padding: 120px 24px;
+    background: var(--white);
+    color: var(--navy);
+  }
+
+  .comunidad .section-eyebrow { color: var(--blue-deep); }
+  .comunidad .section-title { color: var(--navy); }
+
+  .comunidad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .comunidad-img {
+    aspect-ratio: 9 / 19;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid var(--blue);
+    box-shadow: 0 16px 40px rgba(10, 143, 255, 0.2);
+  }
+
+  /* =========== FINAL CTA =========== */
+  .final-cta {
+    padding: 140px 24px;
+    text-align: center;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: var(--yellow);
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .final-cta::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: var(--blue);
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .final-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .final-inner h2 {
+    font-family: var(--display);
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .final-inner h2 .yellow {
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 0 14px;
+    display: inline-block;
+    transform: rotate(-1deg);
+  }
+
+  .final-inner p {
+    color: var(--white);
+    font-size: 17px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* =========== FOOTER =========== */
+  footer {
+    padding: 40px 24px;
+    background: var(--navy);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    height: 26px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+  }
+
+  .footer-meta {
+    font-family: var(--display);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* =========== RESPONSIVE =========== */
+  @media (max-width: 900px) {
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-grid { grid-template-columns: 1fr; max-width: 380px; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 12px 20px; }
+    .nav-logo { height: 28px; }
+    .nav-cta { padding: 8px 16px; font-size: 12px; }
+    .hero { padding: 110px 20px 60px; }
+    .hero-logo { height: 64px; margin-bottom: 24px; }
+    .testimonials, .benefits, .comunidad { padding: 80px 20px; }
+    .final-cta { padding: 100px 20px; }
+    .social-proof { padding: 36px 20px; }
+    .comunidad-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .play-btn { width: 72px; height: 72px; }
+    .play-btn svg { width: 30px; height: 30px; }
+    .cta { padding: 18px 36px; font-size: 18px; }
+    .benefit { aspect-ratio: 4 / 5; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =========== NAV =========== -->
+<nav>
+  <a href="#top"><img src="assets/logo.png" alt="RESET.CREA" class="nav-logo"></a>
+  <a href="#lista" class="nav-cta" onclick="goToWaitlist(event)">Lista de espera</a>
+</nav>
+
+<!-- =========== HERO =========== -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <img src="assets/logo.png" alt="RESET.CREA" class="hero-logo">
+
+    <h1 class="hero-title">
+      Construye una Marca <span class="highlight">Auténtica</span> en Redes que Impacte y Conecte Con tus clientes
+    </h1>
+
+    <div class="hero-sub">3 secretos para viralizar tus videos con +100K vistas</div>
+
+    <div class="audio-hint">(activa el audio)</div>
+
+    <!-- VSL -->
+    <div class="vsl-wrapper">
+      <div class="vsl-frame" id="vslFrame">
+        <div class="vsl-placeholder" id="vslPlaceholder" onclick="playVSL()">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="vsl-placeholder-text">▸ Reproducir video</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a href="#lista" class="cta cta-yellow" onclick="goToWaitlist(event)">
+        Unirme a la lista
+        <svg class="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <div class="cta-meta">Cupos limitados · Sin compromiso</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== SOCIAL PROOF =========== -->
+<section class="social-proof">
+  <div class="rating">
+    <span class="stars">★★★★★</span> 9.5 de 10 estrellas
+  </div>
+  <div class="social-headline">
+    +200 emprendedores y creadores de contenido
+  </div>
+  <p class="social-sub">
+    ya aplican la metodología de RESET.CREA para vivir de su talento, atraer clientes de alto valor y posicionarse en redes de forma auténtica y sin depender de anuncios.
+  </p>
+</section>
+
+<!-- =========== TESTIMONIOS =========== -->
+<section class="testimonials">
+  <div class="section-eyebrow">— Historias reales</div>
+  <h2 class="section-title">Resultados de la <span class="yellow">comunidad</span></h2>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <iframe
+        src="https://www.youtube.com/embed/YbDtFtJZyVQ"
+        title="Testimonio RESET.CREA"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"></iframe>
+    </div>
+    <div class="testi-card">
+      <iframe
+        src="https://www.youtube.com/embed/w02gRAzToYc"
+        title="Testimonio RESET.CREA"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"></iframe>
+    </div>
+    <div class="testi-card">
+      <iframe
+        src="https://www.youtube.com/embed/soLevrK3CV4"
+        title="Testimonio RESET.CREA"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- =========== BENEFICIOS =========== -->
+<section class="benefits">
+  <div class="section-eyebrow">— Qué vas a lograr</div>
+  <h2 class="section-title">Qué te llevás adentro</h2>
+
+  <div class="benefits-grid">
+    <div class="benefit">
+      <img src="assets/benefit-01.avif" alt="" class="benefit-img">
+      <div class="benefit-overlay"></div>
+      <div class="benefit-content">
+        <div class="benefit-num">01</div>
+        <div class="benefit-text">
+          <div class="benefit-kicker">Conviértete en creador de contenido</div>
+          <div class="benefit-title">Disruptivo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit">
+      <img src="assets/benefit-02.avif" alt="" class="benefit-img">
+      <div class="benefit-overlay"></div>
+      <div class="benefit-content">
+        <div class="benefit-num">02</div>
+        <div class="benefit-text">
+          <div class="benefit-kicker">Aprende a viralizar videos con nuestro</div>
+          <div class="benefit-title">Blueprint 0 a 100K views</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit">
+      <img src="assets/benefit-03.avif" alt="" class="benefit-img">
+      <div class="benefit-overlay"></div>
+      <div class="benefit-content">
+        <div class="benefit-num">03</div>
+        <div class="benefit-text">
+          <div class="benefit-kicker">Clases de edición en vivo con</div>
+          <div class="benefit-title">Profesionales</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="benefit">
+      <img src="assets/benefit-04.avif" alt="" class="benefit-img">
+      <div class="benefit-overlay"></div>
+      <div class="benefit-content">
+        <div class="benefit-num">04</div>
+        <div class="benefit-text">
+          <div class="benefit-kicker">Monetiza tu contenido con sistemas</div>
+          <div class="benefit-title">Fuente de ingresos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========== COMUNIDAD =========== -->
+<section class="comunidad">
+  <div class="section-eyebrow">— Adentro</div>
+  <h2 class="section-title">Comunidad RESET.CREA</h2>
+
+  <div class="comunidad-grid">
+    <img src="assets/comunidad-1.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
+    <img src="assets/comunidad-2.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
+    <img src="assets/comunidad-3.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
+  </div>
+</section>
+
+<!-- =========== FINAL CTA =========== -->
+<section class="final-cta" id="lista">
+  <div class="final-inner">
+    <h2>Los cupos no son <span class="yellow">infinitos.</span></h2>
+    <p>Dejá tu lugar en la lista de espera y recibí acceso prioritario cuando abramos la próxima convocatoria.</p>
+    <a href="#" class="cta cta-yellow" onclick="goToWaitlist(event)">
+      Quiero unirme
+      <svg class="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- =========== FOOTER =========== -->
+<footer>
+  <img src="assets/logo.png" alt="RESET.CREA" class="footer-logo">
+  <div class="footer-meta">© 2026 RESET.CREA · Barcelona</div>
+</footer>
+
+<script>
+  // =========================================================
+  // CONFIGURACIÓN
+  // =========================================================
+
+  // Google Form de lista de espera (ya configurado)
+  const WAITLIST_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfgoZj7wtADlwSCd1Lplqif5OPly1_bQUBowQPjQMLCYmyklQ/viewform?usp=header';
+
+  // VSL — subí el archivo MP4 a assets/vsl.mp4
+  const VSL_SRC = 'assets/vsl.mp4';
+
+  // =========================================================
+
+  function playVSL() {
+    const frame = document.getElementById('vslFrame');
+    const placeholder = document.getElementById('vslPlaceholder');
+
+    const video = document.createElement('video');
+    video.src = VSL_SRC;
+    video.controls = true;
+    video.autoplay = true;
+    video.playsInline = true;
+
+    frame.appendChild(video);
+    placeholder.style.display = 'none';
+
+    video.play().catch(() => {
+      console.log('Autoplay bloqueado — el usuario puede presionar play manualmente');
+    });
+  }
+
+  function goToWaitlist(e) {
+    e.preventDefault();
+    window.open(WAITLIST_URL, '_blank', 'noopener,noreferrer');
+  }
+</script>
+
+</body>
+</html>

@@ -56,9 +56,8 @@
   }
 
   .nav-logo {
-    height: 36px;
+    height: 32px;
     width: auto;
-    filter: brightness(0) invert(1);
   }
 
   .nav-cta {
@@ -129,10 +128,9 @@
   }
 
   .hero-logo {
-    height: 90px;
+    height: 110px;
     width: auto;
-    margin: 0 auto 32px;
-    filter: brightness(0) invert(1);
+    margin: 0 auto 40px;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.1s forwards;
   }
@@ -414,15 +412,15 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .testi-card {
     position: relative;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 16 / 9;
     background: var(--navy);
-    border-radius: 20px;
+    border-radius: 16px;
     overflow: hidden;
     border: 3px solid var(--white);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -466,6 +464,7 @@
     border: 3px solid var(--white);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    background: var(--navy);
   }
 
   .benefit:hover {
@@ -642,9 +641,8 @@
   }
 
   .footer-logo {
-    height: 26px;
+    height: 24px;
     width: auto;
-    filter: brightness(0) invert(1);
     opacity: 0.7;
   }
 
@@ -659,15 +657,15 @@
   /* =========== RESPONSIVE =========== */
   @media (max-width: 900px) {
     .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-    .testi-grid { grid-template-columns: 1fr; max-width: 380px; }
+    .testi-grid { grid-template-columns: 1fr; max-width: 600px; }
   }
 
   @media (max-width: 640px) {
     nav { padding: 12px 20px; }
-    .nav-logo { height: 28px; }
+    .nav-logo { height: 26px; }
     .nav-cta { padding: 8px 16px; font-size: 12px; }
     .hero { padding: 110px 20px 60px; }
-    .hero-logo { height: 64px; margin-bottom: 24px; }
+    .hero-logo { height: 80px; margin-bottom: 32px; }
     .testimonials, .benefits, .comunidad { padding: 80px 20px; }
     .final-cta { padding: 100px 20px; }
     .social-proof { padding: 36px 20px; }
@@ -778,7 +776,7 @@
 
   <div class="benefits-grid">
     <div class="benefit">
-      <img src="assets/benefit-01.avif" alt="" class="benefit-img">
+      <img src="assets/benefit-01.jpg" alt="" class="benefit-img">
       <div class="benefit-overlay"></div>
       <div class="benefit-content">
         <div class="benefit-num">01</div>
@@ -790,7 +788,7 @@
     </div>
 
     <div class="benefit">
-      <img src="assets/benefit-02.avif" alt="" class="benefit-img">
+      <img src="assets/benefit-02.jpg" alt="" class="benefit-img">
       <div class="benefit-overlay"></div>
       <div class="benefit-content">
         <div class="benefit-num">02</div>
@@ -802,7 +800,7 @@
     </div>
 
     <div class="benefit">
-      <img src="assets/benefit-03.avif" alt="" class="benefit-img">
+      <img src="assets/benefit-03.jpg" alt="" class="benefit-img">
       <div class="benefit-overlay"></div>
       <div class="benefit-content">
         <div class="benefit-num">03</div>
@@ -814,7 +812,7 @@
     </div>
 
     <div class="benefit">
-      <img src="assets/benefit-04.avif" alt="" class="benefit-img">
+      <img src="assets/benefit-04.jpg" alt="" class="benefit-img">
       <div class="benefit-overlay"></div>
       <div class="benefit-content">
         <div class="benefit-num">04</div>
@@ -833,9 +831,9 @@
   <h2 class="section-title">Comunidad RESET.CREA</h2>
 
   <div class="comunidad-grid">
-    <img src="assets/comunidad-1.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
-    <img src="assets/comunidad-2.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
-    <img src="assets/comunidad-3.avif" alt="Comunidad RESET.CREA" class="comunidad-img">
+    <img src="assets/comunidad-1.jpg" alt="Comunidad RESET.CREA" class="comunidad-img">
+    <img src="assets/comunidad-2.jpg" alt="Comunidad RESET.CREA" class="comunidad-img">
+    <img src="assets/comunidad-3.jpg" alt="Comunidad RESET.CREA" class="comunidad-img">
   </div>
 </section>
 
@@ -861,17 +859,8 @@
 </footer>
 
 <script>
-  // =========================================================
-  // CONFIGURACIÓN
-  // =========================================================
-
-  // Google Form de lista de espera (ya configurado)
   const WAITLIST_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfgoZj7wtADlwSCd1Lplqif5OPly1_bQUBowQPjQMLCYmyklQ/viewform?usp=header';
-
-  // VSL — subí el archivo MP4 a assets/vsl.mp4
   const VSL_SRC = 'assets/vsl.mp4';
-
-  // =========================================================
 
   function playVSL() {
     const frame = document.getElementById('vslFrame');
@@ -887,7 +876,7 @@
     placeholder.style.display = 'none';
 
     video.play().catch(() => {
-      console.log('Autoplay bloqueado — el usuario puede presionar play manualmente');
+      console.log('Autoplay bloqueado — usuario puede presionar play manualmente');
     });
   }
 

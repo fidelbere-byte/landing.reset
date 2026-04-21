@@ -654,10 +654,120 @@
     color: rgba(255, 255, 255, 0.5);
   }
 
+  /* =========== PROBLEMAS =========== */
+  .problemas {
+    padding: 120px 24px;
+    background: var(--navy);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problemas::before {
+    content: '';
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background: var(--blue);
+    border-radius: 50%;
+    filter: blur(180px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .problemas .section-eyebrow { color: var(--yellow); position: relative; z-index: 2; }
+
+  .problemas-title {
+    font-family: var(--display);
+    font-size: clamp(32px, 4.8vw, 56px);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto 20px;
+    max-width: 1000px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .problemas-subtitle {
+    font-family: var(--body);
+    font-size: clamp(15px, 1.5vw, 17px);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 64px;
+    line-height: 1.55;
+    position: relative;
+    z-index: 2;
+  }
+
+  .problemas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .problema {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 36px 32px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .problema:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 229, 0, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .problema-num {
+    font-family: var(--display);
+    font-size: 48px;
+    color: var(--yellow);
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .problema-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  .problema-desc {
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .problemas-cta {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
   /* =========== RESPONSIVE =========== */
   @media (max-width: 900px) {
     .benefits-grid { grid-template-columns: repeat(2, 1fr); }
     .testi-grid { grid-template-columns: 1fr; max-width: 600px; }
+    .problemas-grid { grid-template-columns: 1fr; max-width: 540px; }
   }
 
   @media (max-width: 640px) {
@@ -667,6 +777,9 @@
     .hero { padding: 110px 20px 60px; }
     .hero-logo { height: 80px; margin-bottom: 32px; }
     .testimonials, .benefits, .comunidad { padding: 80px 20px; }
+    .problemas { padding: 80px 20px; }
+    .problema { padding: 28px 24px; }
+    .problema-num { font-size: 40px; margin-bottom: 16px; }
     .final-cta { padding: 100px 20px; }
     .social-proof { padding: 36px 20px; }
     .comunidad-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -691,7 +804,7 @@
     <img src="logo.png" alt="RESET.CREA" class="hero-logo">
 
     <h1 class="hero-title">
-      Construye una Marca <span class="highlight">Auténtica</span> en Redes que Impacte y Conecte Con tus clientes
+      Construye una Marca <span class="highlight">Auténtica</span> en Redes que Impacte y Construya el Trabajo de tus Sueños
     </h1>
 
     <div class="hero-sub">3 secretos para viralizar tus videos con +100K vistas</div>
@@ -732,14 +845,61 @@
     +200 emprendedores y creadores de contenido
   </div>
   <p class="social-sub">
-    ya aplican la metodología de RESET.CREA para vivir de su talento, atraer clientes de alto valor y posicionarse en redes de forma auténtica y sin depender de anuncios.
+    ya aplican la metodología de RESET.CREA para vivir de su talento, atraer clientes de alto valor y posicionarse en redes de forma auténtica.
   </p>
+</section>
+
+<!-- =========== PROBLEMAS =========== -->
+<section class="problemas">
+  <div class="section-eyebrow">— Lo que pasa de verdad</div>
+  <h2 class="problemas-title">
+    Si quieres crear contenido pero te trabas en lo <span class="yellow">mismo de siempre…</span>
+  </h2>
+  <p class="problemas-subtitle">
+    Estos son los 4 muros que frenan al 90% de los que intentan construir su marca por su cuenta — y lo que vas a resolver adentro de RESET.CREA.
+  </p>
+
+  <div class="problemas-grid">
+    <div class="problema">
+      <span class="problema-num">01</span>
+      <h3 class="problema-title">Publicas dos semanas seguidas y después desapareces</h3>
+      <p class="problema-desc">Empiezas con todo, armas un par de videos, y a los 10 días ya no sabes qué subir. El problema no es la motivación, es que no tienes un sistema para generar ideas y sostener un calendario sin que dependa de tu inspiración del día.</p>
+    </div>
+
+    <div class="problema">
+      <span class="problema-num">02</span>
+      <h3 class="problema-title">Tu contenido se parece al de todos los demás</h3>
+      <p class="problema-desc">Sigues fórmulas que viste funcionar a otros, usas los mismos formatos, los mismos ganchos — y tu cuenta termina siendo una más del montón. Diferenciarse no es cuestión de creatividad, es cuestión de método.</p>
+    </div>
+
+    <div class="problema">
+      <span class="problema-num">03</span>
+      <h3 class="problema-title">Usas IA y se nota que es IA</h3>
+      <p class="problema-desc">Sabes que la IA te puede ahorrar horas, pero todo lo que sale parece escrito por un bot. El problema no es la herramienta, es no saber cómo usarla para que potencie tu voz en lugar de reemplazarla.</p>
+    </div>
+
+    <div class="problema">
+      <span class="problema-num">04</span>
+      <h3 class="problema-title">Sabes qué tienes que hacer pero no lo haces</h3>
+      <p class="problema-desc">Tienes los cursos, tienes las ideas, hasta tienes el guion escrito — pero no lo publicas. Miedo, perfeccionismo, síndrome del impostor. La parte técnica es la fácil; la mentalidad es la que define quién termina construyendo y quién se queda mirando.</p>
+    </div>
+  </div>
+
+  <div class="problemas-cta">
+    <a href="#lista" class="cta cta-yellow" onclick="goToWaitlist(event)">
+      Quiero resolver esto
+      <svg class="cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
 </section>
 
 <!-- =========== TESTIMONIOS =========== -->
 <section class="testimonials">
   <div class="section-eyebrow">— Historias reales</div>
-  <h2 class="section-title">Resultados de la <span class="yellow">comunidad</span></h2>
+  <h2 class="section-title">Resultados de los <span class="yellow">clientes</span></h2>
 
   <div class="testi-grid">
     <div class="testi-card">
@@ -781,8 +941,8 @@
       <div class="benefit-content">
         <div class="benefit-num">01</div>
         <div class="benefit-text">
-          <div class="benefit-kicker">Conviértete en creador de contenido</div>
-          <div class="benefit-title">Disruptivo</div>
+          <div class="benefit-kicker">Aprende a crear contenido</div>
+          <div class="benefit-title">Único y diferenciado</div>
         </div>
       </div>
     </div>
@@ -817,8 +977,8 @@
       <div class="benefit-content">
         <div class="benefit-num">04</div>
         <div class="benefit-text">
-          <div class="benefit-kicker">Monetiza tu contenido con sistemas</div>
-          <div class="benefit-title">Fuente de ingresos</div>
+          <div class="benefit-kicker">Aprende cómo monetizar</div>
+          <div class="benefit-title">Tu audiencia y habilidades</div>
         </div>
       </div>
     </div>
@@ -855,7 +1015,7 @@
 <!-- =========== FOOTER =========== -->
 <footer>
   <img src="logo.png" alt="RESET.CREA" class="footer-logo">
-  <div class="footer-meta">© 2026 RESET.CREA · Barcelona</div>
+  <div class="footer-meta">© 2026 RESET.CREA</div>
 </footer>
 
 <script>

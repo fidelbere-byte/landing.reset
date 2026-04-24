@@ -208,6 +208,66 @@
     border: 0;
   }
 
+  .vsl-unmute {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    background: rgba(10, 37, 64, 0.55);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 5;
+    transition: opacity 0.3s ease;
+    animation: pulseOverlay 2.5s ease-in-out infinite;
+  }
+
+  .vsl-unmute:hover { background: rgba(10, 37, 64, 0.45); }
+
+  @keyframes pulseOverlay {
+    0%, 100% { background: rgba(10, 37, 64, 0.55); }
+    50% { background: rgba(10, 37, 64, 0.4); }
+  }
+
+  .unmute-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    box-shadow: 0 14px 40px rgba(255, 229, 0, 0.4);
+    animation: bounceIcon 1.8s ease-in-out infinite;
+  }
+
+  .unmute-icon svg { width: 34px; height: 34px; }
+
+  @keyframes bounceIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  .unmute-text {
+    font-family: var(--body);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+  }
+
+  .unmute-cta {
+    font-family: var(--display);
+    font-size: clamp(16px, 1.8vw, 22px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    text-align: center;
+  }
+
   .vsl-placeholder {
     position: absolute;
     inset: 0;
@@ -814,11 +874,21 @@
     <!-- VSL -->
     <div class="vsl-wrapper">
       <div class="vsl-frame" id="vslFrame">
-        <div class="vsl-placeholder" id="vslPlaceholder" onclick="playVSL()">
-          <div class="play-btn">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <iframe
+          id="vslIframe"
+          src="https://www.youtube.com/embed/vgdKg3m-apg?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&loop=0&playlist=vgdKg3m-apg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          frameborder="0"></iframe>
+        <div class="vsl-unmute" id="vslUnmute" onclick="unmuteVSL()">
+          <div class="unmute-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/>
+              <line x1="23" y1="9" x2="17" y2="15"/>
+              <line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
           </div>
-          <div class="vsl-placeholder-text">▸ Reproducir video</div>
+          <div class="unmute-text">Tu video está silenciado</div>
+          <div class="unmute-cta">TOCÁ PARA ACTIVAR EL AUDIO</div>
         </div>
       </div>
     </div>
@@ -1024,21 +1094,14 @@
   // YouTube video ID
   const VSL_YOUTUBE_ID = 'vgdKg3m-apg';
 
-  function playVSL() {
-    const frame = document.getElementById('vslFrame');
-    const placeholder = document.getElementById('vslPlaceholder');
+  function unmuteVSL() {
+    const iframe = document.getElementById('vslIframe');
+    const overlay = document.getElementById('vslUnmute');
 
-    // Parámetros para bloquear al máximo la interfaz pero permitir pause/mute:
-    // autoplay=1 → empieza solo
-    // controls=0 → oculta barra de progreso (no pueden saltear)
-    // modestbranding=1 → quita el logo de YouTube
-    // rel=0 → no muestra videos relacionados al final
-    // disablekb=1 → desactiva teclado (flechas no adelantan)
-    // fs=0 → desactiva fullscreen
-    // iv_load_policy=3 → oculta anotaciones
-    // playsinline=1 → en mobile reproduce inline, no fullscreen
+    // Recargar iframe con mute=0 (con audio) y desde el principio
     const params = [
       'autoplay=1',
+      'mute=0',
       'controls=0',
       'modestbranding=1',
       'rel=0',
@@ -1048,13 +1111,11 @@
       'playsinline=1'
     ].join('&');
 
-    const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${VSL_YOUTUBE_ID}?${params}`;
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-    iframe.setAttribute('frameborder', '0');
 
-    frame.appendChild(iframe);
-    placeholder.style.display = 'none';
+    // Ocultar overlay con fade
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 300);
   }
 
   function goToWaitlist(e) {

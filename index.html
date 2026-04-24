@@ -1020,24 +1020,41 @@
 
 <script>
   const WAITLIST_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfgoZj7wtADlwSCd1Lplqif5OPly1_bQUBowQPjQMLCYmyklQ/viewform?usp=header';
-  const VSL_SRC = 'vsl.mp4';
+
+  // YouTube video ID
+  const VSL_YOUTUBE_ID = 'vgdKg3m-apg';
 
   function playVSL() {
     const frame = document.getElementById('vslFrame');
     const placeholder = document.getElementById('vslPlaceholder');
 
-    const video = document.createElement('video');
-    video.src = VSL_SRC;
-    video.controls = true;
-    video.autoplay = true;
-    video.playsInline = true;
+    // Parámetros para bloquear al máximo la interfaz pero permitir pause/mute:
+    // autoplay=1 → empieza solo
+    // controls=0 → oculta barra de progreso (no pueden saltear)
+    // modestbranding=1 → quita el logo de YouTube
+    // rel=0 → no muestra videos relacionados al final
+    // disablekb=1 → desactiva teclado (flechas no adelantan)
+    // fs=0 → desactiva fullscreen
+    // iv_load_policy=3 → oculta anotaciones
+    // playsinline=1 → en mobile reproduce inline, no fullscreen
+    const params = [
+      'autoplay=1',
+      'controls=0',
+      'modestbranding=1',
+      'rel=0',
+      'disablekb=1',
+      'fs=0',
+      'iv_load_policy=3',
+      'playsinline=1'
+    ].join('&');
 
-    frame.appendChild(video);
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${VSL_YOUTUBE_ID}?${params}`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.setAttribute('frameborder', '0');
+
+    frame.appendChild(iframe);
     placeholder.style.display = 'none';
-
-    video.play().catch(() => {
-      console.log('Autoplay bloqueado — usuario puede presionar play manualmente');
-    });
   }
 
   function goToWaitlist(e) {
